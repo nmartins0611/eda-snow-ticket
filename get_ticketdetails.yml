@@ -1,16 +1,56 @@
 ---
-- name: Process ServiceNow ticket with event data
+- name: Retrieve ServiceNow ticket details and filter for GitHub repository
   hosts: localhost
   gather_facts: no
 
   vars:
-    ticket_number: "{{ ansible.eda.payload }}"
-    servicenow_instance: "{{ snow_instance | default('your-instance.service-now.com') }}"
+    servicenow_instance: "https://dev216600.service-now.com"
     servicenow_username: "{{ snow_username | default('admin') }}"
-    servicenow_password: "{{ snow_password | default('password') }}"
-    ticket_number: "{{ ticket_number | default('INC0010001') }}"
+    servicenow_password: "{{ snow_password | default('!') }}"
+    ticket_number: "{{ ansible_eda.event.payload.number | default('') }}"
     github_repo_filter: "{{ github_repo | default('') }}"
 
+  
   tasks:
 
-  
+   - name: get details
+     debug:
+      msg: "{{ ansible_eda.event.payload.number }}"
+
+   - name: Retrieve incidents by number
+     servicenow.itsm.change_request_info:
+      instance:
+       host: "{{ servicenow_instance }}"
+       username: "{{ servicenow_username }}"
+       password: "{{ servicenow_password }}"
+      number: "{{ ticket_number }}"
+     register: result
+     delegate_to: localhost
+
+   - name: print
+     debug:
+      msg: "{{ result }}"
+
+   - name: Extract GitHub details from ServiceNow change request description
+     set_fact:
+       github_repo: "{{ result.records[0].description | regex_search('Repository: (https://[^\\r\\n]+)', '\\1') | first }}"
+       github_file: "{{ result.records[0].description | regex_search('File: ([^\\r\\n]+)', '\\1') | first }}"
+       github_branch: "{{ result.records[0].description | regex_search('Branch: ([^\\r\\n]+)', '\\1') | first }}"
+
+   - name: Display extracted GitHub details
+     debug:
+       msg: 
+         - "Repository: {{ github_repo }}"
+         - "File: {{ github_file }}"
+         - "Branch: {{ github_branch }}"
+
+
+#
+#   - name: Extract GitHub URL from short_description
+#     set_fact:
+#      github_url: "{{ result.records[0].short_description | regex_search('https://github\\.com/[^\\s]+') }}"
+
+
+#   - name: Display the extracted GitHub URL
+#     debug:
+#      var: github_url
