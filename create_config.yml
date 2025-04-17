@@ -1,3 +1,16 @@
+---
+- name: Configure controller with new project and templates
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    servicenow_instance: "https://dev216600.service-now.com"
+    servicenow_username: "{{ snow_username | default('admin') }}"
+    servicenow_password: "{{ snow_password | default('!') }}"
+    ticket_number: "{{ ansible_eda.event.payload.number | default('') }}"
+    github_repo_filter: "{{ github_repo | default('') }}"
+  
+  
   - name: (EXECUTION) Add project
     ansible.controller.project:
       name: "Roadshow"
