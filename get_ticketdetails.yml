@@ -1,0 +1,16 @@
+---
+- name: Process ServiceNow ticket with event data
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    ticket_number: "{{ ansible.eda.payload }}"
+    servicenow_instance: "{{ snow_instance | default('your-instance.service-now.com') }}"
+    servicenow_username: "{{ snow_username | default('admin') }}"
+    servicenow_password: "{{ snow_password | default('password') }}"
+    ticket_number: "{{ ticket_number | default('INC0010001') }}"
+    github_repo_filter: "{{ github_repo | default('') }}"
+
+  tasks:
+
+  
