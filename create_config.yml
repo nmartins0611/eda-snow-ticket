@@ -6,7 +6,7 @@
   vars:
     code_repo:
     playbook:
-    code_branch:
+    code_branch: dev-ai
     controller_host:
     controller_username:
     controller_password:
@@ -20,6 +20,7 @@
        organization: "Default"
        scm_type: git
        scm_url: "{{ code_repo }}"
+       scm_branch: "{{ code_branch }}"
        state: present
        controller_host: "{{ controller_host }}"
        controller_username: "{{ controller_username }}"
