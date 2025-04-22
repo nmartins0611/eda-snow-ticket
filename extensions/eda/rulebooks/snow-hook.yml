@@ -8,7 +8,7 @@
 
   rules:
 
-    - name: backup all switches
+    - name: Incident detected
       condition: event.payload.state == "1"
       action:
        run_workflow_template:
