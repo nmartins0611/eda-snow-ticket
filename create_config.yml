@@ -15,7 +15,7 @@
   
    - name: Add project
      ansible.controller.project:
-       name: "New Code Repo"
+       name: "New Code Repo - Montecarlo"
        description: "New Repo from SNOW"
        organization: "Default"
        scm_type: git
