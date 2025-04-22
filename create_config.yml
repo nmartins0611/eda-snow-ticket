@@ -4,14 +4,12 @@
   gather_facts: no
 
   vars:
-    servicenow_instance: "https://dev216600.service-now.com"
-    servicenow_username: "{{ snow_username | default('admin') }}"
-    servicenow_password: "{{ snow_password | default('!') }}"
-    ticket_number: "{{ ansible_eda.event.payload.number | default('') }}"
-    github_repo_filter: "{{ github_repo | default('') }}"
-    github_repo: "{{ result.records[0].description | regex_search('Repository: (https://[^\\r\\n]+)', '\\1') | first }}"
-    github_file: "{{ result.records[0].description | regex_search('File: ([^\\r\\n]+)', '\\1') | first }}"
-    github_branch: "{{ result.records[0].description | regex_search('Branch: ([^\\r\\n]+)', '\\1') | first }}"
+    github_repo: 
+    github_file: 
+    github_branch:
+    controller_host:
+    controller_username:
+    controller_password:
 
   tasks:
   
