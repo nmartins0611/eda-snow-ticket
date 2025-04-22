@@ -50,4 +50,5 @@
          code_repo: "{{ github_repo }}"
          playbook: "{{ github_file }}"
          code_branch: "{{ github_branch }}"
+         ticket: "{{ ticket_number }}"
 
