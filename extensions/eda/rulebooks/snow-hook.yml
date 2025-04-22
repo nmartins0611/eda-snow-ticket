@@ -11,6 +11,7 @@
     - name: backup all switches
       condition: event.payload.state == "-5"
       action:
-       run_playbook:
-        name: response.yml
+       run_workflow_template:
+        name: "ServiceNow - New Code"
+        organization: Default
         post_events: true
