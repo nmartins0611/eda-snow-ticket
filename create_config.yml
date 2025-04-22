@@ -34,7 +34,7 @@
        inventory: ""
        project: "Roadshow"
        playbook: "{{ github_file }}"
-       execution_environment: "Rhel_ee"
+       execution_environment: "Default execution environment"
        credentials:
          - "Application Nodes"
        state: "present"
