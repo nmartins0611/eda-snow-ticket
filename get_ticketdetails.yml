@@ -6,19 +6,16 @@
   vars:
     servicenow_instance: "https://dev216600.service-now.com"
     servicenow_username: "{{ snow_username | default('admin') }}"
-    servicenow_password: "{{ snow_password | default('!') }}"
+    servicenow_password: "{{ snow_password | default('Ansible123!') }}"
     ticket_number: "{{ ansible_eda.event.payload.number | default('INC0010032') }}"
     github_repo_filter: "{{ github_repo | default('') }}"
-    github_repo: 
-    github_file: 
-    github_branch: 
 
   
   tasks:
 
-   - name: get details
-     debug:
-      msg: "{{ ansible_eda.event.payload.number }}"
+#   - name: get details
+#     debug:
+#      msg: "{{ ansible_eda.event.payload.number }}"
 
    - name: Retrieve incidents by number
      servicenow.itsm.incident_info:
@@ -35,11 +32,10 @@
       msg: "{{ result }}"
 
    - name: Extract GitHub details from ServiceNow change request description
-     set_stats:
-       data:
-         github_repo: "{{ result.records[0].description | regex_search('Repository: (https://[^\\r\\n]+)', '\\1') | first }}"
-         github_file: "{{ result.records[0].description | regex_search('File: ([^\\r\\n]+)', '\\1') | first }}"
-         github_branch: "{{ result.records[0].description | regex_search('Branch: ([^\\r\\n]+)', '\\1') | first }}"
+     set_fact:
+       github_repo: "{{ result.records[0].description | regex_search('Repository: (https://[^\\r\\n]+)', '\\1') | first }}"
+       github_file: "{{ result.records[0].description | regex_search('File: ([^\\r\\n]+)', '\\1') | first }}"
+       github_branch: "{{ result.records[0].description | regex_search('Branch: ([^\\r\\n]+)', '\\1') | first }}"
 
    - name: Display extracted GitHub details
      debug:
@@ -48,13 +44,3 @@
          - "File: {{ github_file }}"
          - "Branch: {{ github_branch }}"
 
-
-#
-#   - name: Extract GitHub URL from short_description
-#     set_fact:
-#      github_url: "{{ result.records[0].short_description | regex_search('https://github\\.com/[^\\s]+') }}"
-
-
-#   - name: Display the extracted GitHub URL
-#     debug:
-#      var: github_url
