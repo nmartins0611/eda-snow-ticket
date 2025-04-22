@@ -7,7 +7,7 @@
     servicenow_instance: "https://dev216600.service-now.com"
     servicenow_username: "{{ snow_username | default('admin') }}"
     servicenow_password: "{{ snow_password | default('!') }}"
-    ticket_number: "{{ ansible_eda.event.payload.number | default('') }}"
+    ticket_number: "{{ ansible_eda.event.payload.number | default('INC0010032') }}"
     github_repo_filter: "{{ github_repo | default('') }}"
 
   
