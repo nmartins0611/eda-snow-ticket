@@ -4,9 +4,9 @@
   gather_facts: no
 
   vars:
-    github_repo: 
-    github_file: 
-    github_branch:
+    # github_repo: 
+    # github_file: 
+    # github_branch:
     controller_host:
     controller_username:
     controller_password:
