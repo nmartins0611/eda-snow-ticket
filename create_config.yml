@@ -15,8 +15,8 @@
   
    - name: Add project
      ansible.controller.project:
-       name: "New Code Repo - Montecarlo"
-       description: "New Repo from SNOW"
+       name: "Montecarlo Repo"
+       description: "Repository provided by ServiceNow ticket"
        organization: "Default"
        scm_type: git
        scm_url: "{{ code_repo }}"
@@ -28,10 +28,10 @@
 
    - name: Add Template
      ansible.controller.job_template:
-       name: "Deploy Montecarlo"
+       name: "Deploy Montecarlo Simulation Application"
        job_type: "run"
        inventory: "Demo Inventory"
-       project: "New Code Repo - Montecarlo"
+       project: "Montecarlo Repo"
        playbook: "{{ playbook }}"
        organization: "Default"
        execution_environment: "Default execution environment"
