@@ -31,7 +31,7 @@
        name: "Playbook"
        job_type: "run"
        inventory: "Demo Inventory"
-       project: "New Code Repo"
+       project: "New Code Repo - Montecarlo"
        playbook: "{{ playbook }}"
        execution_environment: "Default execution environment"
        credentials:
