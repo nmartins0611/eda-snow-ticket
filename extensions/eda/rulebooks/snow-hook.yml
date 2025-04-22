@@ -9,7 +9,7 @@
   rules:
 
     - name: backup all switches
-      condition: event.payload.state == "-1"
+      condition: event.payload.state == "1"
       action:
        run_workflow_template:
         name: "ServiceNow - New Code"
