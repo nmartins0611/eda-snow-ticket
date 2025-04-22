@@ -19,7 +19,7 @@
       number: "{{ ticket }}"
       state: closed
       close_code: "Solved (Permanently)"
-      close_notes: "Repo Configured"
+      close_notes: "The Monte Carlo Insurance Risk Simulation environment has been successfully configured for use with Ansible Automation Platform. Refer to the the Monte Carlo Simulation Application Job Template. This concludes the setup. Please let me know if you need any further assistance."
      register: result
      delegate_to: localhost
 
