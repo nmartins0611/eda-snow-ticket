@@ -13,34 +13,34 @@
     github_file: "{{ result.records[0].description | regex_search('File: ([^\\r\\n]+)', '\\1') | first }}"
     github_branch: "{{ result.records[0].description | regex_search('Branch: ([^\\r\\n]+)', '\\1') | first }}"
 
+  tasks:
   
-  
-  - name: Add project
-    ansible.controller.project:
-      name: "New Repo from SNOW"
-      description: "New Repo from SNOW"
-      organization: "Default"
-      scm_type: git
-      scm_url: "{{ github_repo }}"
-      state: present
-      controller_host: "{{ controller_host }}"
-      controller_username: "{{ controller_username }}"
-      controller_password: "{{ controller_password }}"
-      validate_certs: false
+   - name: Add project
+     ansible.controller.project:
+       name: "New Repo from SNOW"
+       description: "New Repo from SNOW"
+       organization: "Default"
+       scm_type: git
+       scm_url: "{{ github_repo }}"
+       state: present
+       controller_host: "{{ controller_host }}"
+       controller_username: "{{ controller_username }}"
+       controller_password: "{{ controller_password }}"
+       validate_certs: false
 
-  - name: Add Template
-    ansible.controller.job_template:
-      name: "Playbook"
-      job_type: "run"
-      organization: "Default"
-      inventory: ""
-      project: "Roadshow"
-      playbook: "{{ github_file }}"
-      execution_environment: "Rhel_ee"
-      credentials:
-        - "Application Nodes"
-      state: "present"
-      controller_host: "{{ controller_host }}"
-      controller_username: "{{ controller_username }}"
-      controller_password: "{{ controller_password }}"
-      validate_certs: false
+   - name: Add Template
+     ansible.controller.job_template:
+       name: "Playbook"
+       job_type: "run"
+       organization: "Default"
+       inventory: ""
+       project: "Roadshow"
+       playbook: "{{ github_file }}"
+       execution_environment: "Rhel_ee"
+       credentials:
+         - "Application Nodes"
+       state: "present"
+       controller_host: "{{ controller_host }}"
+       controller_username: "{{ controller_username }}"
+       controller_password: "{{ controller_password }}"
+       validate_certs: false
