@@ -9,6 +9,9 @@
     servicenow_password: "{{ snow_password | default('!') }}"
     ticket_number: "{{ ansible_eda.event.payload.number | default('INC0010032') }}"
     github_repo_filter: "{{ github_repo | default('') }}"
+    github_repo: 
+    github_file: 
+    github_branch: 
 
   
   tasks:
