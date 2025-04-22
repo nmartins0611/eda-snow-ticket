@@ -18,7 +18,7 @@
       msg: "{{ ansible_eda.event.payload.number }}"
 
    - name: Retrieve incidents by number
-     servicenow.itsm.change_request_info:
+     servicenow.itsm.incident_info:
       instance:
        host: "{{ servicenow_instance }}"
        username: "{{ servicenow_username }}"
