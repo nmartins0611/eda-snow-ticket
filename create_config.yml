@@ -21,7 +21,7 @@
       description: "New Repo from SNOW"
       organization: "Default"
       scm_type: git
-      scm_url: 
+      scm_url: "{{ github_repo }}"
       state: present
       controller_host: "{{ controller_host }}"
       controller_username: "{{ controller_username }}"
@@ -35,7 +35,7 @@
       organization: "Default"
       inventory: ""
       project: "Roadshow"
-      playbook: "
+      playbook: "{{ github_file }}"
       execution_environment: "Rhel_ee"
       credentials:
         - "Application Nodes"
