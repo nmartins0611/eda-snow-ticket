@@ -12,6 +12,6 @@
       condition: event.payload.state == "1"
       action:
        run_workflow_template:
-        name: "ServiceNow - New Code"
+        name: "Application Deployment Workflow"
         organization: Default
         post_events: true
