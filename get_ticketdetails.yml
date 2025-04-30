@@ -44,11 +44,11 @@
 #         - "File: {{ github_file }}"
 #         - "Branch: {{ github_branch }}"
 #
-#   - name: Set Workflow Vars
-#     set_stats:
-#       data:
-#         code_repo: "{{ github_repo }}"
-#         playbook: "{{ github_file }}"
-#         code_branch: "{{ github_branch }}"
-#         ticket: "{{ ticket_number }}"
-#
+   - name: Set Workflow Vars
+     set_stats:
+       data:
+         code_repo: "{{ github_repo }}"
+         playbook: "{{ github_file }}"
+         code_branch: "{{ github_branch }}"
+         ticket: "{{ ticket_number }}"
+
