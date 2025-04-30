@@ -12,6 +12,6 @@
       condition: event.payload.state == "1"
       action:
        run_workflow_template:
-        name: "Application Deployment Workflow"
+        name: "Application Update Resources Workflow"
         organization: Default
         post_events: true

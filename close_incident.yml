@@ -19,7 +19,7 @@
       number: "{{ ticket }}"
       state: closed
       close_code: "Solved (Permanently)"
-      close_notes: "The Monte Carlo Insurance Risk Simulation environment has been successfully configured for use with Ansible Automation Platform. Refer to the the Monte Carlo Simulation Application Job Template. This concludes the setup. Please let me know if you need any further assistance."
+      close_notes: The Car Quote App has been successfully updated with additional resources by Ansible Automation Platform. Refer to the the Car Quote Application Update Resources Job Template for further details. This concludes the setup. Please reopen this ticket if the issue persists."
      register: result
      delegate_to: localhost
 

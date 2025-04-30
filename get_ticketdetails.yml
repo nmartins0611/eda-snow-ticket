@@ -31,24 +31,24 @@
      debug:
       msg: "{{ result }}"
 
-   - name: Extract GitHub details from ServiceNow change request description
-     set_fact:
-       github_repo: "{{ result.records[0].description | regex_search('Repository: (https://[^\\r\\n]+)', '\\1') | first }}"
-       github_file: "{{ result.records[0].description | regex_search('File: ([^\\r\\n]+)', '\\1') | first }}"
-       github_branch: "{{ result.records[0].description | regex_search('Branch: ([^\\r\\n]+)', '\\1') | first }}"
-
-   - name: Display extracted GitHub details
-     debug:
-       msg: 
-         - "Repository: {{ github_repo }}"
-         - "File: {{ github_file }}"
-         - "Branch: {{ github_branch }}"
-
-   - name: Set Workflow Vars
-     set_stats:
-       data:
-         code_repo: "{{ github_repo }}"
-         playbook: "{{ github_file }}"
-         code_branch: "{{ github_branch }}"
-         ticket: "{{ ticket_number }}"
-
+#   - name: Extract GitHub details from ServiceNow change request description
+#     set_fact:
+#       github_repo: "{{ result.records[0].description | regex_search('Repository: (https://[^\\r\\n]+)', '\\1') | first }}"
+#       github_file: "{{ result.records[0].description | regex_search('File: ([^\\r\\n]+)', '\\1') | first }}"
+#       github_branch: "{{ result.records[0].description | regex_search('Branch: ([^\\r\\n]+)', '\\1') | first }}"
+#
+#   - name: Display extracted GitHub details
+#     debug:
+#       msg: 
+#         - "Repository: {{ github_repo }}"
+#         - "File: {{ github_file }}"
+#         - "Branch: {{ github_branch }}"
+#
+#   - name: Set Workflow Vars
+#     set_stats:
+#       data:
+#         code_repo: "{{ github_repo }}"
+#         playbook: "{{ github_file }}"
+#         code_branch: "{{ github_branch }}"
+#         ticket: "{{ ticket_number }}"
+#
