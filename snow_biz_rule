@@ -1,0 +1,73 @@
+(function executeRule(current, previous /*null when async*/) {
+    try {
+        // Build the payload with change request information
+        var payload = {
+            "number": current.number.toString(),
+            "sys_id": current.sys_id.toString(),
+            "short_description": current.short_description.toString(),
+            "description": current.description.toString(),
+            "state": current.state.toString(),
+            "type": current.type.toString(),
+            "risk": current.risk.toString(),
+            "assigned_to": current.assigned_to.toString(),
+            "change_plan": current.change_plan.toString(),
+            "backout_plan": current.backout_plan.toString(),
+            "updated_on": current.sys_updated_on.toString(),
+            "updated_by": current.sys_updated_by.toString()
+        };
+        
+        // If it's an update, include what changed
+        if (previous && current.operation() == 'update') {
+            var changes = {};
+            for (var fieldName in payload) {
+                if (current[fieldName] != previous[fieldName]) {
+                    changes[fieldName] = {
+                        "old_value": previous[fieldName] ? previous[fieldName].toString() : "",
+                        "new_value": current[fieldName] ? current[fieldName].toString() : ""
+                    };
+                }
+            }
+            payload.changes = changes;
+        }
+        
+        // First webhook
+        sendWebhook(
+            'http://<>:5000/endpoint', Replace with your  endpoint
+            payload,
+            current.number,
+            'First Endpoint'
+        );
+        
+        // Second webhook
+        sendWebhook(
+            'http://your-second-endpoint-url.com/webhook',  // Replace with your second endpoint
+            payload,
+            current.number,
+            'Second Endpoint'
+        );
+        
+    } catch (ex) {
+        gs.log('Exception in main webhook handler: ' + ex.message, 'Change Webhook');
+    }
+    
+    // Helper function to send webhook
+    function sendWebhook(url, data, changeNumber, endpointName) {
+        try {
+            // Create the request
+            var request = new GlideHTTPRequest(url);
+            request.addHeader('Content-Type', 'application/json');
+            
+            // Send the request
+            var response = request.post(JSON.stringify(data));
+            
+            // Log the response
+            gs.log('Webhook notification sent to ' + endpointName + ' for change ' + changeNumber + 
+                  '. Status: ' + response.getStatusCode() + ', Response: ' + response.getBody(), 
+                  'Change Webhook');
+            
+        } catch (ex) {
+            gs.log('Error sending to ' + endpointName + ': ' + ex.message, 'Change Webhook');
+        }
+    }
+    
+})(current, previous);
